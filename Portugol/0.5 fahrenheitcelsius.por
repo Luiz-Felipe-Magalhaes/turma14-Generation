@@ -12,7 +12,7 @@ programa
 
 		real temperaturaCelsius = (temperaturaFahrenheit-32)/1.8  //Formula de conversão °C = (°F - 32)/1,8
 
-		escreva ("The temperature in Celsius is: "+Matematica.arredondar(temperaturaCelsius, 2)+"°C\n"))
+		escreva ("The temperature in Celsius is: ",temperaturaCelsius,"°C\n")
 
 		se (temperaturaFahrenheit>=77) {
 			escreva ("Today is a pool day!\n") 
@@ -28,7 +28,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 145; 
+ * @POSICAO-CURSOR = 424; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;

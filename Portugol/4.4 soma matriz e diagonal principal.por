@@ -16,7 +16,7 @@ programa
 
 				soma = soma+(matriz[linha][coluna])
 
-				se (matriz[linha][coluna]==matriz[coluna][linha])
+				se (linha==coluna)
 					{
 						somaDiagonal = somaDiagonal+matriz[linha][coluna]
 					}
@@ -33,9 +33,9 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 126; 
+ * @POSICAO-CURSOR = 462; 
  * @PONTOS-DE-PARADA = ;
- * @SIMBOLOS-INSPECIONADOS = ;
+ * @SIMBOLOS-INSPECIONADOS = {matriz, 6, 10, 6};
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
  * @FILTRO-ARVORE-TIPOS-DE-SIMBOLO = variavel, vetor, matriz, funcao;
  */
