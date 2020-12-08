@@ -9,28 +9,28 @@ public class CelsiusToFahrenheit {
 		Scanner leia = new Scanner (System.in);
 		
 		double temperaturaCelsius, temperaturaFahrenheit;
-		int opcao;
+		char opcao;
 		
 		//ch = input.next().charAt(0);
 		
-		System.out.println("Escolha uma opção para converter\nCelsius para Fahrenheit[1] ou Fahrenheit para Celsius[2]");
-		opcao = leia.nextInt();
+		System.out.println("Escolha uma opção para converter\nCelsius para Fahrenheit[F] ou Fahrenheit para Celsius[C]");
+		opcao = leia.next().toUpperCase().charAt(0);
 				
-		if (opcao == 1)
+		if (opcao == 'C')
 		{
 			System.out.print("Digite a temperatura em Celsius: ");
 			temperaturaCelsius = leia.nextDouble();
 			
 			temperaturaFahrenheit = Math.ceil(temperaturaCelsius*1.8+32);
-			System.out.print(temperaturaCelsius+"°C em Fahrenheit é: "+temperaturaFahrenheit);
+			System.out.print(temperaturaCelsius+"°C em Fahrenheit é: "+temperaturaFahrenheit+"°F");
 		}
-		else if (opcao == 2)
+		else if (opcao == 'F')
 		{
 			System.out.print("Digite a temperatura em Fahrenheit: ");
 			temperaturaFahrenheit = leia.nextDouble();
 			
 			temperaturaCelsius = Math.ceil((temperaturaFahrenheit-32)/1.8);
-			System.out.print(temperaturaFahrenheit+"°F em Celsius é:  "+temperaturaCelsius);
+			System.out.print(temperaturaFahrenheit+"°F em Celsius é:  "+temperaturaCelsius+"°C");
 		}		
 	}
 }
