@@ -1,8 +1,7 @@
 package Exemplos;
 import java.util.Scanner;
-public class ProgramaData
+public class exemploEd_UsoDeFuncao
 {
-	
 	
 	public static void main(String[] args) // esse é o programa principal
 	
