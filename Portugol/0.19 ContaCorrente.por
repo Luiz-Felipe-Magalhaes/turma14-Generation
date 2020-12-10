@@ -29,7 +29,7 @@ programa
                     saldo-=movimentacoes[i]
                     
 
-                }  se (saldo < = 0)
+                }  se (saldo <= 0)
                  {
                     escreva ("Você nao possui saldo suficiente \n")
                 }
@@ -55,7 +55,7 @@ programa
  * Esta seção do arquivo guarda informações do Portugol Studio.
  * Você pode apagá-la se estiver utilizando outro editor.
  * 
- * @POSICAO-CURSOR = 1140; 
+ * @POSICAO-CURSOR = 1135; 
  * @PONTOS-DE-PARADA = ;
  * @SIMBOLOS-INSPECIONADOS = ;
  * @FILTRO-ARVORE-TIPOS-DE-DADO = inteiro, real, logico, cadeia, caracter, vazio;
