@@ -10,7 +10,7 @@ public class banco_contasSemMatriz
 		Scanner leia = new Scanner (System.in);
 		char opcaoMenuInicial, opcaoContinuar='S';
 		int tamanhoLinha=80, numeroOperacoes=3;
-		String numeroConta="01";
+		String numeroConta="00001";
 		double saldoConta=0.00;
 
 		do
