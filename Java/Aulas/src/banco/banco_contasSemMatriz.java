@@ -49,6 +49,7 @@ public class banco_contasSemMatriz
 			else if (opcaoMenuInicial == '6')
 			{
 				System.out.println("\nObrigado por utilizar o G7 Bank.");
+				break;
 			}
 
 		}
