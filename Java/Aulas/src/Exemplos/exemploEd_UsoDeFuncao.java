@@ -25,7 +25,7 @@ public class exemploEd_UsoDeFuncao
 		System.out.println(minoMina(sexo));
 		if (minoMina(sexo) == "Mino")
 		{
-			System.out.println("EScolheu um menino");
+			System.out.println("Escolheu um menino");
 		}
 		
 		System.out.println("Fim de programa!!!");

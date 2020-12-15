@@ -13,23 +13,22 @@ public class banco_contaEmpresa
 		char tipoTransacao [] = new char [10];
 		double saldoConta[] = new double [40];
 		double somaSaldo=0;
+		double limiteEmprestimo=10000, valorEmprestimo=0;
 		int limiteTransacoes = 3, contaTransacoes=0;
-		char opcaoMenuConta, opcaoOutraTransacao='N';
+		char opcaoMenuConta, opcaoOutraTransacao='N', opcaoEmprestimo;
 		int tamanhoLinha = 80;
 		
-		
-		
+				
 		do
 		{	
 			desenhaLinha(tamanhoLinha);
 			System.out.println("\nCONTA EMPRESA - G7 BANK");
 			desenhaLinha(tamanhoLinha);
-			System.out.println("\n[1] - Realizar Transações\n[2] - Saldo em Conta\n[3] - Solicitar Emprestimo\n[4] - SAIR");
+			System.out.println("\n[1] - Realizar Transações\n[2] - Saldo em Conta\n[3] - Sair");
 			desenhaLinha(tamanhoLinha);
 			System.out.print("\nDigite a opção desejada: ");
 			opcaoMenuConta = leia.next().charAt(0);
-			
-							
+					
 			if (opcaoMenuConta == '1')
 			{	
 				do 
@@ -45,48 +44,115 @@ public class banco_contaEmpresa
 						if (tipoTransacao[i] == 'C')
 						{
 							System.out.print("\nTransação realizada com sucesso.");
-							somaSaldo += valorTransacao[i];
+							/*somaSaldo*/saldoConta[i] += valorTransacao[i];
 							contaTransacoes++;
-							saldoConta[i] = somaSaldo;
-							
-							System.out.printf("\nSaldo Atual: R$%.2f\n",saldoConta[i]);
-								
+							//saldoConta[i] = somaSaldo;
+							System.out.printf("\nSaldo Atual: R$%.2f\n",saldoConta[i]);	
 							desenhaLinha(tamanhoLinha);
-							
+							System.out.printf("\nVocê tem um emprestimo pré-aprovado de R$%.2f. "
+									+ "\nDeseja contratar S/N? ",limiteEmprestimo);
+							opcaoEmprestimo = leia.next().toUpperCase().charAt(0);
+							if (opcaoEmprestimo == 'S')
+							{
+								System.out.print("Digite o valor que deseja solicitar: R$");
+								valorEmprestimo = leia.nextDouble();
+								if ((limiteEmprestimo-valorEmprestimo) < 0)
+								{
+									System.out.println("\nValor não disponivel.");
+								}
+								else if ((limiteEmprestimo-valorEmprestimo) >= 0)
+								{
+									limiteEmprestimo-=valorEmprestimo;
+									/*somaSaldo*/ saldoConta[i]+= valorEmprestimo;
+									//saldoConta[i]=somaSaldo;
+									System.out.println("\nEmprestimo contratado com sucesso.");
+									System.out.printf("Novo limite de Emprestimo: R$%.2f",limiteEmprestimo);
+									System.out.printf("\nSaldo Atual: R$%.2f\n",saldoConta[i]);
+									desenhaLinha(tamanhoLinha);
+								}
+								
+							}
 							System.out.print("\nDeseja realizar outra Transação S/N: ");
 							opcaoOutraTransacao = leia.next().toUpperCase().charAt(0);
 							break;
 							
+							
 						}
 						else if (tipoTransacao[i] == 'D')
 						{
-							if ((somaSaldo - valorTransacao[i])>=0)
+							if ((saldoConta[i]- valorTransacao[i])>=0)
 							{
-								somaSaldo -= valorTransacao[i];
-								saldoConta[i] = somaSaldo;
-								
+															
 								System.out.print("\nTransação realizada com sucesso.");
 								contaTransacoes++;
+								/*somaSaldo*/saldoConta[i] -= valorTransacao[i];
+								//saldoConta[i]=somaSaldo;
 								System.out.printf("\nSaldo Atual: R$%.2f\n",saldoConta[i]);	
 								desenhaLinha(tamanhoLinha);
+								System.out.printf("\nVocê tem um emprestimo pré-aprovado de R$%.2f. "
+										+ "\nDeseja contratar S/N? ",limiteEmprestimo);
+								opcaoEmprestimo = leia.next().toUpperCase().charAt(0);
+								if (opcaoEmprestimo == 'S')
+								{
+									System.out.print("Digite o valor que deseja solicitar: R$");
+									valorEmprestimo = leia.nextDouble();
+									if ((limiteEmprestimo-valorEmprestimo) < 0)
+									{
+										System.out.println("\nValor não disponivel.");
+									}
+									else if ((limiteEmprestimo-valorEmprestimo) >= 0)
+									{
+										limiteEmprestimo-=valorEmprestimo;
+										/*somaSaldo*/saldoConta[i] += valorEmprestimo;
+										//saldoConta[i]=somaSaldo;
+										System.out.println("\nEmprestimo contratado com sucesso.");
+										System.out.printf("Novo limite de Emprestimo: R$%.2f",limiteEmprestimo);
+										System.out.printf("\nSaldo Atual: R$%.2f\n",saldoConta[i]);
+										desenhaLinha(tamanhoLinha);
+									}
+									
+								}
 								System.out.print("\nDeseja realizar outra Transação S/N: ");
 								opcaoOutraTransacao = leia.next().toUpperCase().charAt(0);
 								break;
 							}
-							else if ((somaSaldo - valorTransacao[i]) < 0)				
+							else if ((/*somaSaldo*/ saldoConta[i] - valorTransacao[i]) < 0)				
 							{
 								System.out.println("\nVocê não possui saldo suficiente.");
-								saldoConta[i] = somaSaldo;
-								System.out.printf("Saldo Atual: R$%.2f\n",saldoConta[i]);	
+								//saldoConta[i] = somaSaldo;
+								System.out.printf("Saldo Atual: R$%.2f\n",saldoConta[i]);
 								desenhaLinha(tamanhoLinha);
+								System.out.printf("\nVocê tem um emprestimo pré-aprovado de R$%.2f. "
+										+ "\nDeseja contratar S/N? ",limiteEmprestimo);
+								opcaoEmprestimo = leia.next().toUpperCase().charAt(0);
+								if (opcaoEmprestimo == 'S')
+								{
+									System.out.print("Digite o valor que deseja solicitar: R$");
+									valorEmprestimo = leia.nextDouble();
+									if ((limiteEmprestimo-valorEmprestimo) < 0)
+									{
+										System.out.println("\nValor não disponivel.");
+									}
+									else if ((limiteEmprestimo-valorEmprestimo) >= 0)
+									{
+										limiteEmprestimo-=valorEmprestimo;
+										/*somaSaldo*/saldoConta[i] += valorEmprestimo;
+										//saldoConta[i]=somaSaldo;
+										System.out.println("\nEmprestimo contratado com sucesso.");
+										System.out.printf("Novo limite de Emprestimo: R$%.2f",limiteEmprestimo);
+										System.out.printf("\nSaldo Atual: R$%.2f\n",saldoConta[i]);
+										desenhaLinha(tamanhoLinha);
+									}
+									
+								}
 								System.out.print("\nDeseja realizar outra Transação S/N: ");
 								opcaoOutraTransacao = leia.next().toUpperCase().charAt(0);
 								break;
 							}
 						}
-		
+						
 					}
-					
+									
 				}
 				while(opcaoOutraTransacao == 'S' && contaTransacoes < limiteTransacoes);
 				if (contaTransacoes == limiteTransacoes)
@@ -97,47 +163,26 @@ public class banco_contaEmpresa
 			}
 			if (opcaoMenuConta == '2')
 			{	
-				System.out.printf("\nSaldo Atual: %.2f\n",somaSaldo);
+				System.out.printf("\nSaldo Atual: %.2f\n",somaSaldo/*saldoConta[i]*/);
+				desenhaLinha(tamanhoLinha);
 			}
-			
 			if (opcaoMenuConta == '3')
 			{
-				
+				System.out.println("Obrigado por utilizar o G7Bank.");
+				break;
 			}
-			
-			
-			
-			
-			
 		}
 		while (true);
 		
-		
-		
-		/*EMPRESA - EMPRESTIMO [1000 - 10000] - PODE PEDI EMPRESTADO O VALOR A QUALQUER TEMPO, NÃO PODE FICA NEGATIVO.
-		 *  O EMPRESTIMO É SOLICITADO.
-		 *O SALDO DO EMPRESTIMO É CORRIGIDO A CADA USO.
-		 *
-		 *[1]  - 10 MOVIMENTOS PERMITIDOS
-
-			INICIAR MOVIMENTO S/N: _
-			
-			QUAL O VALOR DO MOVIMENTO: R$ XX.XX
-			[D]DÉBITO OU [C] CRÉDITO: _
-			
-			CONTINUAR S/N: _
-			VOLTA AO MENU INICIAL
-
-		 */
-
 	}
 	
 	
-	static void desenhaLinha (int linha)
+	public static void desenhaLinha (int linha)
 	{
 		for (int i = 1; i<=linha; i++)
 		{
 			System.out.print("—");
 		}
-	}		
+	}
+	
 }
