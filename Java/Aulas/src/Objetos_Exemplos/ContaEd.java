@@ -3,20 +3,13 @@ package Objetos_Exemplos;
 public class ContaEd 
 {
 	//ATRIBUTOS
-		protected int numeroConta;//tem
-		protected double saldo;//tem
-		protected String cpf;//tem
+		private int numeroConta;//tem
+		private double saldo;//tem
+		private String cpf;//tem
 		
 		
 		//CONSTRUTORES - REGRA DE CRIAÇÃO DA CLASSE
 		//PEDREIRO E PEÃO DE OBRA
-		
-		/*
-		public Conta() //CONSTRUTOR PADRÃO - BÁSICO - MINIMO //CONSTRUTOR TEM O MESMO NOME DA CLASSE
-		{
-			
-		}
-		*/
 		
 		// *SOBRECARGA //A MESMA COISA DE UM JEITO DIFERENTE
 		public ContaEd(int numeroConta) 
@@ -51,32 +44,40 @@ public class ContaEd
 
 		
 		
-		//METODOS
+		//METODOS PROPRIOS
+		
 		public void debito(double valorDebito) 
 		{
-			this.saldo = this.saldo - valorDebito;
+			if (testarSaldo(valorDebito))  
+			{
+				this.saldo = this.saldo - valorDebito;
+			} 
+			else
+			{
+				System.out.println("SALDO INDISPONIVEL");
+			}
+			
 			
 		}
-		
-		
-		
+				
 		public void credito (double valorCredito) 
 		{
 			this.saldo = this.saldo + valorCredito;
 		}
 		
-		
-		public void pixDebito(double valorDebitoPix )
+		public boolean testarSaldo(double valor) 
 		{
-			this.saldo = this.saldo - valorDebitoPix;
-		}
-		
-		public void pixCredito(double valorCreditoPix )
-		{
-			this.saldo = this.saldo - valorCreditoPix;
-		}
-		
-		public void trocarNumero(int novoNumero) {
-			this.numeroConta = novoNumero;
+			boolean teste;
+			
+			if (valor <= this.saldo) 
+			{
+				teste = true;
+			} 
+			else 
+			{
+				teste = false;
+			}
+			
+			return teste;
 		}
 }

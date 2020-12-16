@@ -25,4 +25,14 @@ public class ContaPoupancaEd extends ContaEd
 			this.dataAniversarioConta = dataAniversarioConta;
 		}
 		
+		public void correcaoPoupanca(int dataAtual) {
+			
+			if (dataAtual == this.dataAniversarioConta) {
+				super.credito((super.getSaldo()*0.005));
+				
+				
+				
+			}
+		}
+		
 }

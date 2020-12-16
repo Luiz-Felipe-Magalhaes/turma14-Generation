@@ -36,8 +36,8 @@ public class banco_Completo2
 		    
 		    for(i=0; i<40; i++) 
 		    {
-		    	tipoConta[i] = sorteia.nextInt(5);
-		    	//tipoConta[i]=4;
+		    	//tipoConta[i] = sorteia.nextInt(5);
+		    	tipoConta[i]=4;
 		    }
 		   
 		    do 
