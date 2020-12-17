@@ -564,7 +564,7 @@ public class banco_Completo2
 								}
 								//verificar se entrou no limite.
 																		
-								else if ((saldoConta - valorOperacao) < 0 && (saldoConta - valorOperacao) >= saldoNegativo && (limiteDisponivel - valorOperacao) >= 0)
+								else if ((saldoConta < valorOperacao) && (saldoConta - valorOperacao) >= saldoNegativo && (limiteDisponivel - valorOperacao) >= 0)
 								{		
 									limiteDisponivel += saldoConta-valorOperacao;				
 									saldoConta = 0;
@@ -584,14 +584,9 @@ public class banco_Completo2
 								else if ((saldoConta - valorOperacao) < 0 && (saldoConta - valorOperacao) < saldoNegativo) 
 								{	
 									System.out.println("\nTransação Não autorizada. Limite indisponivel.");
-									System.out.printf("\nLimite Atual: R$%.2f\nSaldo Atual: R$%.2f\n", limiteDisponivel, saldoConta); //incluir limite disponivel
-									
+									System.out.printf("\nLimite Atual: R$%.2f\nSaldo Atual: R$%.2f\n", limiteDisponivel, saldoConta); //incluir limite disponivel		
 								}
-								
-							
-			
 							}
-			
 						}
 						System.out.print("\nDeseja realizar mais transações S/N? ");
 						opcaoContinuar = leia.next().toUpperCase().charAt(0);
