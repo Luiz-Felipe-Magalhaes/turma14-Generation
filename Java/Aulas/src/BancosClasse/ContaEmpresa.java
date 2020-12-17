@@ -10,11 +10,11 @@ public class ContaEmpresa extends Conta
 	private double emprestimoEmpresa;
 	
 	//Construtores
-		public ContaEmpresa(int numeroConta, double emprestimoEmpresa) 
-		{
-			super(numeroConta);
-			this.emprestimoEmpresa = emprestimoEmpresa;
-		}
+	public ContaEmpresa(int numeroConta, String cpf, double emprestimoEmpresa) 
+	{
+		super(numeroConta, cpf);
+		this.emprestimoEmpresa = emprestimoEmpresa;
+	}
 		
 	//Getters and Setters
 	public double getEmprestimoEmpresa() 
@@ -41,5 +41,12 @@ public class ContaEmpresa extends Conta
 			System.out.println("\nSolicitação não aprovada. Fale com seu gerente.");
 		}
 	}
+
+	public void close() 
+	{
+		
+	}
+
+	
 	
 }

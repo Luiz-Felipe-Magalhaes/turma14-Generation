@@ -429,9 +429,7 @@ public class banco_Completo2
 											System.out.println("\nEmprestimo contratado com sucesso.");
 											System.out.printf("Novo limite de Emprestimo: R$%.2f",limiteEmprestimo);
 											System.out.printf("\nSaldo Atual: R$%.2f\n",saldoConta);
-								
-										}
-										
+										}		
 									}
 									System.out.print("\nDeseja realizar outra Transação S/N: ");
 									opcaoOutraTransacao = leia.next().toUpperCase().charAt(0);

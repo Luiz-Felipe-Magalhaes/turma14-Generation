@@ -1,14 +1,14 @@
-package loja;
+package lojaSemClasse;
 
+import java.util.Calendar;
 import java.util.Scanner;
 
 public class CadLoja 
 {
 
 	public static void main(String[] args) 
-	{
+	{	
 		Scanner leia = new Scanner(System.in);
-
 		String nome;
 		char genero, opcaoMenuInicial, opcaoMenu2, opcaoConfirmaDisco, opcaoContinuar = 'S';
 		String codigos[] = new String[10];
@@ -110,7 +110,8 @@ public class CadLoja
 
 	}
 
-	static void linha(int tamanhoLinha) {
+	static void linha(int tamanhoLinha) 
+	{
 
 		for (int x = 1; x <= tamanhoLinha; x++) {
 			System.out.print("—");
@@ -129,4 +130,17 @@ public class CadLoja
 		}
 		return tipo;
 	}
+	
+	public void dataAtual()
+	{	
+		Calendar data = Calendar.getInstance();
+		int diaAtual = data.get(Calendar.DATE);
+		int mêsAtual = data.get(Calendar.MONTH)+1;
+		int anoAtual = data.get(Calendar.YEAR);
+		
+		System.out.printf("Data: %d / %d / %d", diaAtual, mêsAtual, anoAtual);		
+	}
+	
+	
 }
+

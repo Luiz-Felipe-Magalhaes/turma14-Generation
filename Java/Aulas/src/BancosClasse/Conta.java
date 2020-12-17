@@ -7,12 +7,23 @@ public abstract class Conta
 	Scanner leia = new Scanner(System.in);
 	
 	//Atributos:
+	protected String nome;
 	protected int numeroConta;
 	protected double saldoConta;
 	protected String cpf;
 	protected boolean ativa;
 	
 	//Getters and Setters:
+	public String getNome() 
+	{
+		return nome;
+	}
+
+	public void setNome(String nome) 
+	{
+		this.nome = nome;
+	}
+		
 	public int getNumeroConta() 
 	{
 		return numeroConta;
@@ -59,9 +70,9 @@ public abstract class Conta
 	
 	//Métodos:
 	public void FazerCredito (double valorTransacao)
-	{
+	{	
 		this.saldoConta+=valorTransacao;
-		System.out.printf("\nTransação realizada com sucesso.\nSaldo atual: R$%.2f\n",getSaldoConta());
+		System.out.printf("\nTransação realizada com sucesso.\nSaldo atual: R$%.2f\n",getSaldoConta());			
 	}
 	
 	public void FazerDebito (double valorTransacao)
