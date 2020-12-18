@@ -2,7 +2,7 @@ package BancosClasse;
 
 import java.util.Scanner;
 
-public class bancoTeste 
+public class bancoTeste  
 {
 
 	public static void main(String[] args) 
@@ -12,7 +12,7 @@ public class bancoTeste
 		String cpfConta, nome;
 		double valorTransacao, valorEmprestimo;
 		char opcaoConta, opcaoMenu, tipoTransacao, opcaoContinuar, opcaoMenuConta, aceiteEmprestimo, opcaoSaida;
-		int numeroConta=0, contaTransacoes=0, transacoesRealizadas=0, limiteTransacoes=3;
+		int numeroConta=0, contaTransacoes=0, transacoesRealizadas=0, limiteTransacoes=10;
 		
 		
 		System.out.println("G7-Bank");
@@ -31,9 +31,9 @@ public class bancoTeste
 								
 				System.out.println("\n1 - Conta Poupança");
 				System.out.println("2 - Conta Corrente");
-				System.out.println("3 - Conta Especial");
+				System.out.println("3 - Conta Especial - WIP");
 				System.out.println("4 - Conta Empresa");
-				System.out.println("5 - conta Universitaria");
+				System.out.println("5 - Conta Universitaria");
 				System.out.print("Escolha o tipo de conta que deseja abrir: ");
 				opcaoConta = leia.next().charAt(0);
 				numeroConta++;
@@ -102,36 +102,24 @@ public class bancoTeste
 							}
 							
 							corrente.talao(3,0);
-							
-							
-							
-							
+										
 							System.out.print("\nDeseja realizar mais transações S/N:");
 							opcaoContinuar = leia.next().toUpperCase().charAt(0);
-							
-							
-							
-							
-							
-							
+				
 							if (opcaoContinuar == 'S')
 							{
 								transacoesRealizadas++;
 							}
 							opcaoContinuar = limiteTransacoes(opcaoContinuar, limiteTransacoes, transacoesRealizadas);
-							
-							
-							
+		
 						}
 						while (opcaoContinuar == 'S');
 
-						
-						
 					}
 					break;
 					case '3':
 					{
-						ContaEspecial especial = new ContaEspecial(numeroConta,cpfConta,5000);
+						System.out.println("WIP");
 					}
 					break;
 					case '4':
@@ -188,17 +176,63 @@ public class bancoTeste
 							System.out.println("Obrigado por utilizar o G7Bank.");
 							break;
 						}
-					
-						
+	
 					}
 					break;
 					case '5':
 					{
-						ContaUniversitaria universitaria = new ContaUniversitaria();
+						ContaUniversitaria universitaria = new ContaUniversitaria(numeroConta,cpfConta,1000,1000);
+						
+						opcaoMenuConta = menuInicial();
+						if (opcaoMenuConta == '1')
+						{	
+						
+						do
+						{	
+							System.out.printf("Qual transação deseja realizar [C]Credito ou D[Débito]: ");
+							tipoTransacao = leia.next().toUpperCase().charAt(0);
+							System.out.printf("Informe o valor da transação: R$");
+							valorTransacao = leia.nextDouble();
+							
+							if (tipoTransacao == 'C')
+							{
+								universitaria.Credito(valorTransacao);
+							}
+							else if (tipoTransacao == 'D')
+							{
+								universitaria.Debito(valorTransacao);
+							}
+							System.out.println("\nSaldo atual: " + universitaria.getSaldoConta() + 
+									"\nValor Limite Disponível: " + universitaria.getLimite()
+									+ "\nValor Limite Universitário Disponível: " + universitaria.getLimiteUniversitario());
+							
+							System.out.print("\nDeseja realizar mais transações S/N:");
+							opcaoContinuar = leia.next().toUpperCase().charAt(0);
+							
+							if (opcaoContinuar == 'S')
+							{
+								transacoesRealizadas++;
+							}
+							
+							opcaoContinuar = limiteTransacoes(opcaoContinuar, limiteTransacoes, transacoesRealizadas);
+							
+						}
+						while (opcaoContinuar == 'S');
+						}
+						else if (opcaoMenuConta == '2')
+						{
+							System.out.printf("Saldo Atual: R$%.2f\n",universitaria.getSaldoConta());
+						}
+						else if (opcaoMenuConta == '3')
+						{
+							System.out.println("Obrigado por utilizar o G7 - Bank.");
+							break;
+						}
+	
 					}
-					break;
-				}
 					
+					break;
+				}	
 			}
 			else if (opcaoMenu == '2')
 			{

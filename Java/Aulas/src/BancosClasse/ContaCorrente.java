@@ -24,14 +24,14 @@ public class ContaCorrente extends Conta
     }
     public void talao(int talao, int qtdTalao) {
         char opcao;
-        do {
+        
             Scanner leia = new Scanner(System.in);
-            System.out.println("Você deseja imprimir talão? S/N ");
+            System.out.print("Você deseja imprimir talão S/N: ");
             opcao = leia.next().toUpperCase().charAt(0);
-            while (opcao != 'S' && opcao != 'N') {
-                System.out.println("\nOpção inválida. Deseja continuar? S/N");
-                opcao = leia.next().toUpperCase().charAt(0);
-            }
+            //while (opcao != 'S' && opcao != 'N') {
+              //  System.out.println("\nOpção inválida. Deseja continuar? S/N");
+               // opcao = leia.next().toUpperCase().charAt(0);
+           // }
             if (opcao == 'S') {
                 System.out.println("Digite a quantidade que deseja: (Até 3 talões por mês)");
                 qtdTalao = leia.nextInt();
@@ -50,9 +50,9 @@ public class ContaCorrente extends Conta
                 }
                 System.out.printf("Quantidade diária impressa: %d\n", qtdTalao);
                 System.out.printf("Quantidade total impressa: %d\n", totalTalao);
-                System.out.println("Deseja continuar? \n[S]-Sim \n[N]-Não");
-                opcao = leia.next().toUpperCase().charAt(0);
+               // System.out.println("Deseja continuar? \n[S]-Sim \n[N]-Não");
+              //  opcao = leia.next().toUpperCase().charAt(0);
             }
-        } while (opcao == 'S');
+      
     }
 }

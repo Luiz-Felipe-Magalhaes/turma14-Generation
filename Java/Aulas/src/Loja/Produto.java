@@ -7,7 +7,10 @@ public class Produto
 	private String codigoProduto;
 	private double precoUnitario;
 	private int qtdProdutoEstoque;
+	private double faturamento;
 	
+	
+
 	//Construtores:
 	public Produto(String nomeProduto, String codigoProduto, double precoUnitario) 
 	{
@@ -54,17 +57,35 @@ public class Produto
 	}
 	
 	//Métodos:
-	public double vendaRealizada (int qtdVendida)
+	public double vendaRealizadaAVista (int qtdVendida)
 	{
-		double valorVenda = qtdVendida*this.getPrecoUnitario();
+		double valorVenda=0;
 		
+		if (testarQtdEstoque (qtdVendida))
+		{
+			this.qtdProdutoEstoque-=qtdVendida;
+			valorVenda = (qtdVendida*this.getPrecoUnitario())*0.9*1.09;
+		}
+				
 		return valorVenda;
 	}
+	
+	public double vendaRealizadaDebito (int qtdVendida)
+	{
+		double valorVenda=0;
+		
+		if (testarQtdEstoque (qtdVendida))
+		{
+			this.qtdProdutoEstoque-=qtdVendida;
+			valorVenda = qtdVendida*this.getPrecoUnitario();
+		}
+				
+		return valorVenda;
+	} 
 	
 	public void adicionaEstoque (int qtdEntrada)
 	{
 		this.qtdProdutoEstoque+=qtdEntrada;
-		System.out.printf("Abastecimento realizada.\nQuantidade anterior: %d\nQuantidade atual: %d",this.getQtdProdutoEstoque()-qtdEntrada,qtdEntrada);
 	}
 
 	public void retiraEstoque(int qtdRetirada)
