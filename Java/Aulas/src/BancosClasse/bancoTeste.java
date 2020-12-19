@@ -31,7 +31,7 @@ public class bancoTeste
 								
 				System.out.println("\n1 - Conta Poupança");
 				System.out.println("2 - Conta Corrente");
-				System.out.println("3 - Conta Especial - WIP");
+				System.out.println("3 - Conta Especial");
 				System.out.println("4 - Conta Empresa");
 				System.out.println("5 - Conta Universitaria");
 				System.out.print("Escolha o tipo de conta que deseja abrir: ");
@@ -50,6 +50,7 @@ public class bancoTeste
 						Poupanca poupanca = new Poupanca(numeroConta,nome,dataAniversario);
 						
 	                	do{
+	                		System.out.printf("Saldo Atual: R$%.2f\n",poupanca.getSaldoConta());
 	                		System.out.printf("Qual transação deseja realizar [C]Credito ou D[Débito]: ");
 							tipoTransacao = leia.next().toUpperCase().charAt(0);
 							System.out.printf("Informe o valor da transação: R$");
@@ -86,7 +87,8 @@ public class bancoTeste
 						ContaCorrente corrente = new ContaCorrente(numeroConta, cpfConta);
 						
 						do{
-	                		System.out.printf("Qual transação deseja realizar [C]Credito ou D[Débito]: ");
+							System.out.printf("\nSaldo Atual: R$%.2f\n",corrente.getSaldoConta());
+	                		System.out.printf("\nQual transação deseja realizar [C]Credito ou D[Débito]: ");
 							tipoTransacao = leia.next().toUpperCase().charAt(0);
 							System.out.printf("Informe o valor da transação: R$");
 							valorTransacao = leia.nextDouble();
@@ -118,10 +120,47 @@ public class bancoTeste
 					}
 					break;
 					case '3':
-					{
-						System.out.println("WIP");
-					}
-					break;
+	                {
+	                    ContaEspecial especial= new ContaEspecial(numeroConta,cpfConta,1000,1000);
+	                    opcaoMenuConta = menuInicial();
+	                    if (opcaoMenuConta == '1')
+	                    {
+	                    do
+	                    {
+	                    	System.out.printf("Saldo Atual: R$%.2f\n",especial.getSaldoConta());
+	                        System.out.printf("Qual transação deseja realizar [C]Credito ou D[Débito]: ");
+	                        tipoTransacao = leia.next().toUpperCase().charAt(0);
+	                        System.out.printf("Informe o valor da transação: R$");
+	                        valorTransacao = leia.nextDouble();
+	                        if (tipoTransacao == 'C')
+	                        {
+	                            especial.FazerCredito(valorTransacao);
+	                        }
+	                        else if (tipoTransacao == 'D')
+	                        {
+	                            especial.FazerDebito(valorTransacao);
+	                        }
+	                        System.out.print("\nDeseja realizar mais transações S/N:");
+	                        opcaoContinuar = leia.next().toUpperCase().charAt(0);
+	                        if (opcaoContinuar == 'S')
+	                        {
+	                            transacoesRealizadas++;
+	                        }
+	                        opcaoContinuar = limiteTransacoes(opcaoContinuar, limiteTransacoes, transacoesRealizadas);
+	                    }
+	                    while (opcaoContinuar == 'S');
+	                    }
+	                    else if (opcaoMenuConta == '2')
+	                    {
+	                        System.out.printf("Saldo Atual: R$%.2f\n",especial.getSaldoConta());
+	                    }
+	                    else if (opcaoMenuConta == '3')
+	                    {
+	                        System.out.println("Obrigado por utilizar o G7Bank.");
+	                        break;
+	                    }
+	                }
+	                break;
 					case '4':
 					{	
 						ContaEmpresa empresa = new ContaEmpresa(numeroConta,cpfConta,10000);
@@ -132,6 +171,7 @@ public class bancoTeste
 						
 						do
 						{	
+							System.out.printf("Saldo Atual: R$%.2f\n",empresa.getSaldoConta());
 							System.out.printf("Qual transação deseja realizar [C]Credito ou D[Débito]: ");
 							tipoTransacao = leia.next().toUpperCase().charAt(0);
 							System.out.printf("Informe o valor da transação: R$");
@@ -189,6 +229,7 @@ public class bancoTeste
 						
 						do
 						{	
+							System.out.printf("Saldo Atual: R$%.2f\n",universitaria.getSaldoConta());
 							System.out.printf("Qual transação deseja realizar [C]Credito ou D[Débito]: ");
 							tipoTransacao = leia.next().toUpperCase().charAt(0);
 							System.out.printf("Informe o valor da transação: R$");
@@ -243,7 +284,7 @@ public class bancoTeste
 				System.out.println("Obrigado por utilizar o G7 - Bank.");
 				break;
 			}
-			System.out.println("Deseja Continuar S/N");
+			System.out.println("Deseja Voltar ao Menu Inicial S/N");
 			opcaoSaida = leia.next().toUpperCase().charAt(0);
 		}
 		while(opcaoSaida == 'S');

@@ -18,7 +18,7 @@ public class lojaTeste
 		Collection <String >produtosEstoque = new ArrayList();
 		
 		int anoNascimento, qtdVendida;
-		char generoCliente, opcaoContinuar='S', opcaoVoltarMenuInicial ='S', opcaoMenuInicial='S';
+		char generoCliente, opcaoContinuar='S', opcaoVoltarMenuInicial ='S', opcaoMenuInicial='S', formaPagamento;
 		String nomeCliente, cpfCliente, escolhaDisco;
 		int tamanhoLinha = 80;
 		int anoAtual = data.get(Calendar.YEAR);
@@ -94,7 +94,7 @@ public class lojaTeste
 					} 	
 					else if (clienteTeste.getGenero() == 'O') 
 					{
-						System.out.printf("\nSeja bem-vindo a McFly Discos Srx. %s.\n", clienteTeste.getNome());
+						System.out.printf("\nSeja bem-vindx a McFly Discos Srx. %s.\n", clienteTeste.getNome());
 					}
 					linha(tamanhoLinha);
 								
@@ -137,9 +137,11 @@ public class lojaTeste
 					{	
 						System.out.printf("Disco escolhido: %s\nDigite a quantidade desejada: ",produto1.getNomeProduto());
 						qtdVendida = leia.nextInt();
+						
 						if (produto1.getQtdProdutoEstoque() >= qtdVendida)
-						{
-							System.out.printf("Compra Realizada\nValor Total: R$%.2f",produto1.vendaRealizadaAVista(qtdVendida));
+						{	
+							produto1.realizarVenda(qtdVendida);
+							produto1.emitirNota();
 						}
 						else
 						{
@@ -153,7 +155,8 @@ public class lojaTeste
 						qtdVendida = leia.nextInt();
 						if (produto2.getQtdProdutoEstoque() >= qtdVendida)
 						{
-							System.out.printf("Compra Realizada\nValor Total: R$%.2f",produto2.vendaRealizadaAVista(qtdVendida));
+							produto2.realizarVenda(qtdVendida);
+							produto1.emitirNota();
 						}
 						else
 						{
@@ -166,7 +169,8 @@ public class lojaTeste
 						qtdVendida = leia.nextInt();
 						if (produto3.getQtdProdutoEstoque() >= qtdVendida)
 						{
-							System.out.printf("Compra Realizada\nValor Total: R$%.2f",produto3.vendaRealizadaAVista(qtdVendida));
+							produto3.realizarVenda(qtdVendida);
+							produto1.emitirNota();
 						}
 						else
 						{
@@ -179,7 +183,8 @@ public class lojaTeste
 						qtdVendida = leia.nextInt();
 						if (produto4.getQtdProdutoEstoque() >= qtdVendida)
 						{
-							System.out.printf("Compra Realizada\nValor Total: R$%.2f",produto4.vendaRealizadaAVista(qtdVendida));
+							produto4.realizarVenda(qtdVendida);
+							produto1.emitirNota();
 						}
 						else
 						{
@@ -192,7 +197,8 @@ public class lojaTeste
 						qtdVendida = leia.nextInt();
 						if (produto5.getQtdProdutoEstoque() >= qtdVendida)
 						{
-							System.out.printf("Compra Realizada\nValor Total: R$%.2f",produto5.vendaRealizadaAVista(qtdVendida));
+							produto5.realizarVenda(qtdVendida);
+							produto1.emitirNota();
 						}
 						else
 						{
@@ -205,7 +211,8 @@ public class lojaTeste
 						qtdVendida = leia.nextInt();
 						if (produto6.getQtdProdutoEstoque() >= qtdVendida)
 						{
-							System.out.printf("Compra Realizada\nValor Total: R$%.2f",produto6.vendaRealizadaAVista(qtdVendida));
+							produto6.realizarVenda(qtdVendida);
+							produto1.emitirNota();
 						}
 						else
 						{
@@ -218,7 +225,8 @@ public class lojaTeste
 						qtdVendida = leia.nextInt();
 						if (produto7.getQtdProdutoEstoque() >= qtdVendida)
 						{
-							System.out.printf("Compra Realizada\nValor Total: R$%.2f",produto7.vendaRealizadaAVista(qtdVendida));
+							produto7.realizarVenda(qtdVendida);
+							produto1.emitirNota();
 						}
 						else
 						{
@@ -231,7 +239,8 @@ public class lojaTeste
 						qtdVendida = leia.nextInt();
 						if (produto8.getQtdProdutoEstoque() >= qtdVendida)
 						{
-							System.out.printf("Compra Realizada\nValor Total: R$%.2f",produto8.vendaRealizadaAVista(qtdVendida));
+							produto8.realizarVenda(qtdVendida);
+							produto1.emitirNota();
 						}
 						else
 						{
@@ -244,7 +253,8 @@ public class lojaTeste
 						qtdVendida = leia.nextInt();
 						if (produto9.getQtdProdutoEstoque() >= qtdVendida)
 						{
-							System.out.printf("Compra Realizada\nValor Total: R$%.2f",produto9.vendaRealizadaAVista(qtdVendida));
+							produto9.realizarVenda(qtdVendida);
+							produto1.emitirNota();
 						}
 						else
 						{
@@ -257,7 +267,8 @@ public class lojaTeste
 						qtdVendida = leia.nextInt();
 						if (produto10.getQtdProdutoEstoque() >= qtdVendida)
 						{
-							System.out.printf("Compra Realizada\nValor Total: R$%.2f",produto10.vendaRealizadaAVista(qtdVendida));
+							produto10.realizarVenda(qtdVendida);
+							produto1.emitirNota();
 						}
 						else
 						{
