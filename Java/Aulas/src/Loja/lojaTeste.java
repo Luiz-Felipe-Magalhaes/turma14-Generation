@@ -4,83 +4,68 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
-import java.util.TreeMap;
 
 public class lojaTeste 
 {
-
 	public static void main(String[] args) 
 	{
 		Scanner leia = new Scanner(System.in);
 		Calendar data = Calendar.getInstance();
 		Collection <String >produtosEstoque = new ArrayList();
-		
-		int anoNascimento, qtdVendida;
-		char generoCliente, opcaoContinuar='S', opcaoVoltarMenuInicial ='S', opcaoMenuInicial='S', formaPagamento;
+			
+		int anoNascimento, quantidadeVenda;
+		int numeroNotaFiscal = 1994062100;
+		int numeroCodigoBarras = 2020271100;
+		char generoCliente, opcaoContinuar='S', opcaoVoltarMenuInicial ='S', opcaoMenuInicial='S', adicionarNoCarrinho, formaPagamento;
 		String nomeCliente, cpfCliente, escolhaDisco;
 		int tamanhoLinha = 80;
 		int anoAtual = data.get(Calendar.YEAR);
+		double subTotal=0, totalCompra = 0;
+		
+		List<Produto> listaProdutos = new ArrayList();
+		List<Produto> carrinho = new ArrayList();
+		
+		listaProdutos.add(new Produto("Ac/Dc - Let There Be Rock","LP001",200, 10));
+		listaProdutos.add(new Produto("Childish Gambino - Because the Internet","LP002",170, 10));
+		listaProdutos.add(new Produto("Djavan - Vesuvio","LP003",110, 10));
+		listaProdutos.add(new Produto("Gorillaz - Gorillaz","LP004",170, 10));
+		listaProdutos.add(new Produto("Metallica - Ride The Lightning ","LP005",200, 10));
+		listaProdutos.add(new Produto("Milton Nascimento - Clube da Esquina 1","LP006",200, 10));
+		listaProdutos.add(new Produto("Queen - The Works","LP007",220, 10));
+		listaProdutos.add(new Produto("Raimundos - Raimundos","LP008",100, 10));
+		listaProdutos.add(new Produto("Tim Maia - Tim Maia 1973","LP009",110, 10));
+		listaProdutos.add(new Produto("System of a Down - Toxicity","LP010",150, 10));
 		
 		do
 		{	
 			linha(tamanhoLinha);
 			System.out.println("\n\t\t\tMcFly - Discos de Vinil");
 			linha(tamanhoLinha);
-			System.out.println("\n[1] - COMPRAR PRODUTOS\n[2] - PRODUTOS CADASTRADOS\n[3] - SAIR");
-			System.out.print("Digite a op��o desejada: ");
+			System.out.println("\n[1] - COMPRAR PRODUTOS\n[2] - CATÁLOGO DE PRODUTOS\n[3] - SAIR");
+			System.out.print("\nDigite a opção desejada: ");
 			opcaoMenuInicial = leia.next().charAt(0);
+			linha(tamanhoLinha);
+			totalCompra = 0;
+			carrinho.clear();
 			
-			Produto produto1 = new Produto("Ac/Dc - Let There Be Rock","LP001",200);
-			produto1.adicionaEstoque(10);
-			Produto produto2 = new Produto("Childish Gambino - Because the Internet","LP002",170);
-			produto2.adicionaEstoque(10);
-			Produto produto3 = new Produto("Djavan - Vesuvio","LP003",110);
-			produto3.adicionaEstoque(10);
-			Produto produto4 = new Produto("Gorillaz - Gorillaz","LP004",170);
-			produto4.adicionaEstoque(10);
-			Produto produto5 = new Produto("Metallica - Ride The Lightning ","LP005",200);
-			produto5.adicionaEstoque(10);
-			Produto produto6 = new Produto("Milton Nascimento - Clube da Esquina 1","LP006",200);
-			produto6.adicionaEstoque(10);
-			Produto produto7 = new Produto("Queen - The Works","LP007",220);
-			produto7.adicionaEstoque(10);
-			Produto produto8 = new Produto("Raimundos - Raimundos","LP008",100);
-			produto8.adicionaEstoque(10);
-			Produto produto9 = new Produto("Tim Maia - Tim Maia 1973","LP009",110);
-			produto9.adicionaEstoque(10);
-			Produto produto10 = new Produto("System of a Down - Toxicity","LP010",150);
-			produto10.adicionaEstoque(10);
 			
-			produtosEstoque.add("Ac/Dc - Let There Be Rock");
-			produtosEstoque.add("Childish Gambino - Because the Internet");
-			produtosEstoque.add("Djavan - Vesuvio");
-			produtosEstoque.add("Gorillaz - Gorillaz");
-			produtosEstoque.add("Metallica - Ride The Lightning ");
-			produtosEstoque.add("Milton Nascimento - Clube da Esquina 1");
-			produtosEstoque.add("Queen - The Works");
-			produtosEstoque.add("Raimundos - Raimundos");
-			produtosEstoque.add("Tim Maia - Tim Maia 1973");
-			produtosEstoque.add("System of a Down - Toxicity");
-			
-			//do
-			//{
-				if (opcaoMenuInicial == '1') 
-				{
-					System.out.println("\nCadastro Necessario para Compra.\nPreencha com as informa��es necessarias:");
-					System.out.print("Nome: ");
-					nomeCliente = leia.next().toUpperCase();
-					System.out.print("CPF: ");
-					cpfCliente = leia.next();
-					System.out.print("Gen�ro - Digite [F] para Feminino [M] para Masculino [O] para Outro: ");
-					generoCliente = leia.next().toUpperCase().charAt(0);
-					System.out.print("Ano de nascimento: ");
-					anoNascimento = leia.nextInt();			
-					Cliente clienteTeste = new Cliente(nomeCliente, generoCliente, anoNascimento, cpfCliente);
-					clienteTeste.voltaIdade(anoAtual, anoNascimento);
-					System.out.println();
-					linha(tamanhoLinha);
+			if (opcaoMenuInicial == '1') 
+			{
+				System.out.println("\nCadastro Necessario para Compra.\nPreencha com as informações necessarias:");
+				System.out.print("Nome: ");
+				nomeCliente = leia.next().toUpperCase();
+				System.out.print("CPF: ");
+				cpfCliente = leia.next();
+				System.out.print("Genêro - Digite [F] para Feminino [M] para Masculino [O] para Outro: ");
+				generoCliente = leia.next().toUpperCase().charAt(0);
+				System.out.print("Ano de nascimento: ");
+				anoNascimento = leia.nextInt();	
+				Cliente clienteTeste = new Cliente(nomeCliente, generoCliente, anoNascimento, cpfCliente);
+				clienteTeste.voltaIdade(anoAtual, anoNascimento);
+				System.out.println();
+				linha(tamanhoLinha);
 				
 				do
 				{	
@@ -97,215 +82,270 @@ public class lojaTeste
 						System.out.printf("\nSeja bem-vindx a McFly Discos Srx. %s.\n", clienteTeste.getNome());
 					}
 					linha(tamanhoLinha);
-								
-					System.out.printf("\nCODIGO | Pre�o Unit R$ | Estoque  | Produto");
-					System.out.printf("\n %s |    %.2f     |    %d    | %s ", produto1.getCodigoProduto(), produto1.getPrecoUnitario(),
-							produto1.getQtdProdutoEstoque(), produto1.getNomeProduto());
 					
-					System.out.printf("\n %s |    %.2f     |    %d    | %s ", produto2.getCodigoProduto(), produto2.getPrecoUnitario(),
-							produto2.getQtdProdutoEstoque(), produto2.getNomeProduto());
-					
-					System.out.printf("\n %s |    %.2f     |    %d    | %s ", produto3.getCodigoProduto(), produto3.getPrecoUnitario(),
-							produto3.getQtdProdutoEstoque(), produto3.getNomeProduto());
-					
-					System.out.printf("\n %s |    %.2f     |    %d    | %s ", produto4.getCodigoProduto(), produto4.getPrecoUnitario(),
-							produto4.getQtdProdutoEstoque(), produto4.getNomeProduto());
-					
-					System.out.printf("\n %s |    %.2f     |    %d    | %s ", produto5.getCodigoProduto(), produto5.getPrecoUnitario(),
-							produto5.getQtdProdutoEstoque(), produto5.getNomeProduto());
-					
-					System.out.printf("\n %s |    %.2f     |    %d    | %s ", produto6.getCodigoProduto(), produto6.getPrecoUnitario(),
-							produto6.getQtdProdutoEstoque(), produto6.getNomeProduto());
-					
-					System.out.printf("\n %s |    %.2f     |    %d    | %s ", produto7.getCodigoProduto(), produto7.getPrecoUnitario(),
-							produto7.getQtdProdutoEstoque(), produto7.getNomeProduto());
-					
-					System.out.printf("\n %s |    %.2f     |    %d    | %s ", produto8.getCodigoProduto(), produto8.getPrecoUnitario(),
-							produto8.getQtdProdutoEstoque(), produto8.getNomeProduto());
-					
-					System.out.printf("\n %s |    %.2f     |    %d    | %s ", produto9.getCodigoProduto(), produto9.getPrecoUnitario(),
-							produto9.getQtdProdutoEstoque(), produto9.getNomeProduto());
-					
-					System.out.printf("\n %s |    %.2f     |    %d    | %s \n", produto10.getCodigoProduto(), produto10.getPrecoUnitario(),
-							produto10.getQtdProdutoEstoque(), produto10.getNomeProduto());	
-					
+					listarProdutos(listaProdutos);
+					System.out.println();
 					linha(tamanhoLinha);
-					System.out.printf("\nDigite o c�digo do disco desejado: ");
+					System.out.printf("\nDigite o código do disco desejado: ");
 					escolhaDisco = leia.next().toUpperCase();
+					System.out.print("Digite a quantidade desejada: ");
+					quantidadeVenda = leia.nextInt();
+					//linha(tamanhoLinha);
 					
-					if (escolhaDisco.equals("LP001"))
-					{	
-						System.out.printf("Disco escolhido: %s\nDigite a quantidade desejada: ",produto1.getNomeProduto());
-						qtdVendida = leia.nextInt();
-						
-						if (produto1.getQtdProdutoEstoque() >= qtdVendida)
-						{	
-							produto1.realizarVenda(qtdVendida);
-							produto1.emitirNota();
-						}
-						else
-						{
-							System.out.print("Quantidade indisponivel.");
-						}
-						
-					}
-					else if (escolhaDisco.equals("LP002"))
+					for (Produto indiceListaProdutos : listaProdutos)
 					{
-						System.out.printf("Disco escolhido: %s\nDigite a quantidade desejada: ",produto2.getNomeProduto());
-						qtdVendida = leia.nextInt();
-						if (produto2.getQtdProdutoEstoque() >= qtdVendida)
-						{
-							produto2.realizarVenda(qtdVendida);
-							produto1.emitirNota();
+						if (escolhaDisco.equals(indiceListaProdutos.getCodigoProduto()) && quantidadeVenda <= indiceListaProdutos.getQtdProdutoEstoque()
+								&& quantidadeVenda > 0)
+						{							
+							subTotal = indiceListaProdutos.getPrecoUnitario()*quantidadeVenda;
+							System.out.printf("\nDisco selecionado: %d Unidade(s)  -  %s\nValor Unitário: R$%.2f  -  SubTotal: R$%.2f\n",
+									quantidadeVenda, indiceListaProdutos.getNomeProduto(),indiceListaProdutos.getPrecoUnitario(), subTotal);
+							System.out.print("\nAdicionar ao carrinho? S/N: " );
+							adicionarNoCarrinho = leia.next().toUpperCase().charAt(0);
+			
+							if (adicionarNoCarrinho == 'S')
+							{
+								carrinho.add(new Produto(indiceListaProdutos.getNomeProduto(), quantidadeVenda, indiceListaProdutos.getPrecoUnitario()));
+								indiceListaProdutos.retiraEstoque(quantidadeVenda);
+								totalCompra+=subTotal;
+								System.out.printf("\nValor Total no Carrinho: R$%.2f\n",totalCompra);
+								System.out.print("\nDeseja continuar comprando? S/N: ");
+								opcaoContinuar = leia.next().toUpperCase().charAt(0);
+							}													
 						}
-						else
+						else if (escolhaDisco.equals(indiceListaProdutos.getCodigoProduto()) && quantidadeVenda > indiceListaProdutos.getQtdProdutoEstoque())
 						{
-							System.out.print("Quantidade indisponivel.");
+							System.out.print("\nQuantidade indisponivel. Deseja selecionar outro produto? S/N: ");
+							opcaoContinuar = leia.next().toUpperCase().charAt(0);
 						}
+						else if (escolhaDisco.equals(indiceListaProdutos.getCodigoProduto()) && quantidadeVenda <= 0)
+						{
+							System.out.print("\nQuantidade inválida. Deseja selecionar outro produto? S/N: ");
+							opcaoContinuar = leia.next().toUpperCase().charAt(0);
+						}
+												
 					}
-					else if (escolhaDisco.equals("LP003"))
-					{
-						System.out.printf("Disco escolhido: %s\nDigite a quantidade desejada: ",produto3.getNomeProduto());
-						qtdVendida = leia.nextInt();
-						if (produto3.getQtdProdutoEstoque() >= qtdVendida)
-						{
-							produto3.realizarVenda(qtdVendida);
-							produto1.emitirNota();
-						}
-						else
-						{
-							System.out.print("Quantidade indisponivel.");
-						}
-					}
-					else if (escolhaDisco.equals("LP004"))
-					{
-						System.out.printf("Disco escolhido: %s\nDigite a quantidade desejada: ",produto4.getNomeProduto());
-						qtdVendida = leia.nextInt();
-						if (produto4.getQtdProdutoEstoque() >= qtdVendida)
-						{
-							produto4.realizarVenda(qtdVendida);
-							produto1.emitirNota();
-						}
-						else
-						{
-							System.out.print("Quantidade indisponivel.");
-						}
-					}
-					else if (escolhaDisco.equals("LP005"))
-					{
-						System.out.printf("Disco escolhido: %s\nDigite a quantidade desejada: ",produto5.getNomeProduto());
-						qtdVendida = leia.nextInt();
-						if (produto5.getQtdProdutoEstoque() >= qtdVendida)
-						{
-							produto5.realizarVenda(qtdVendida);
-							produto1.emitirNota();
-						}
-						else
-						{
-							System.out.print("Quantidade indisponivel.");
-						}
-					}
-					else if (escolhaDisco.equals("LP006"))
-					{
-						System.out.printf("Disco escolhido: %s\nDigite a quantidade desejada: ",produto6.getNomeProduto());
-						qtdVendida = leia.nextInt();
-						if (produto6.getQtdProdutoEstoque() >= qtdVendida)
-						{
-							produto6.realizarVenda(qtdVendida);
-							produto1.emitirNota();
-						}
-						else
-						{
-							System.out.print("Quantidade indisponivel.");
-						}
-					}
-					else if (escolhaDisco.equals("LP007"))
-					{
-						System.out.printf("Disco escolhido: %s\nDigite a quantidade desejada: ",produto7.getNomeProduto());
-						qtdVendida = leia.nextInt();
-						if (produto7.getQtdProdutoEstoque() >= qtdVendida)
-						{
-							produto7.realizarVenda(qtdVendida);
-							produto1.emitirNota();
-						}
-						else
-						{
-							System.out.print("Quantidade indisponivel.");
-						}
-					}
-					else if (escolhaDisco.equals("LP008"))
-					{
-						System.out.printf("Disco escolhido: %s\nDigite a quantidade desejada: ",produto8.getNomeProduto());
-						qtdVendida = leia.nextInt();
-						if (produto8.getQtdProdutoEstoque() >= qtdVendida)
-						{
-							produto8.realizarVenda(qtdVendida);
-							produto1.emitirNota();
-						}
-						else
-						{
-							System.out.print("Quantidade indisponivel.");
-						}
-					}
-					else if (escolhaDisco.equals("LP009"))
-					{
-						System.out.printf("Disco escolhido: %s\nDigite a quantidade desejada: ",produto9.getNomeProduto());
-						qtdVendida = leia.nextInt();
-						if (produto9.getQtdProdutoEstoque() >= qtdVendida)
-						{
-							produto9.realizarVenda(qtdVendida);
-							produto1.emitirNota();
-						}
-						else
-						{
-							System.out.print("Quantidade indisponivel.");
-						}
-					}
-					else if (escolhaDisco.equals("LP010"))
-					{
-						System.out.printf("Disco escolhido: %s\nDigite a quantidade desejada: ",produto10.getNomeProduto());
-						qtdVendida = leia.nextInt();
-						if (produto10.getQtdProdutoEstoque() >= qtdVendida)
-						{
-							produto10.realizarVenda(qtdVendida);
-							produto1.emitirNota();
-						}
-						else
-						{
-							System.out.print("Quantidade indisponivel.");
-						}
-					}
-					System.out.print("\nDeseja realizar outra compra S/N: ");
-					opcaoContinuar = leia.next().toUpperCase().charAt(0);
-					}
-					while (opcaoContinuar == 'S');
-				}
-						
-			if (opcaoMenuInicial == '2')
-			{
-				System.out.println("\nLISTA DE PRODUTOS CADASTRADOS:");
-				for (String produto : produtosEstoque)
-				{
-					System.out.printf("%s\n",produto);
-				}
-				System.out.println("\n*Consulte a disponibilidade na �rea de compras*\n");
-				System.out.print("Deseja voltar ao Menu Principal S/N: ");
-				opcaoVoltarMenuInicial = leia.next().toUpperCase().charAt(0);
-			}
-			if (opcaoMenuInicial == '3')
-			{
-				break;
-			}							
-		}
-		while (opcaoVoltarMenuInicial == 'S');
-	}
 
-	static void linha(int tamanhoLinha) 
+				}
+				while (opcaoContinuar == 'S');
+				
+				linha (tamanhoLinha);
+				System.out.println();
+				System.out.println("\n\t\t\tCARRINHO DE COMPRAS");
+				System.out.printf("\nQuantidade | Valor Unitário |  SubTotal  | Produto\n");
+				linha(tamanhoLinha);
+				for (Produto indiceCarrinho : carrinho)
+				{	
+					subTotal = indiceCarrinho.getPrecoUnitario()*indiceCarrinho.getQtdVendida();
+					System.out.printf("\n     %d     |    R$%.2f    |  R$%.2f  | %s",indiceCarrinho.getQtdVendida(), indiceCarrinho.getPrecoUnitario(), 
+							subTotal, indiceCarrinho.getNomeProduto());
+				}
+				
+				System.out.printf("\n\nValor Total da Compra: R$%.2f", totalCompra);
+				System.out.println();
+				linha (tamanhoLinha);
+				numeroNotaFiscal ++;
+				numeroCodigoBarras ++;
+				finalizarVenda (totalCompra, clienteTeste.getCpfCliente(), numeroNotaFiscal, numeroCodigoBarras);
+				
+			}
+						
+			else if(opcaoMenuInicial == '2') 
+			{
+				listarProdutos(listaProdutos);
+			}
+			
+			else if(opcaoMenuInicial == '3')
+			{
+				System.out.println("\nObrigado por visitar a McFly Discos. Volte sempre!");
+				break;
+			}
+			
+			System.out.println("\n");
+		}
+		
+		while (true);
+		
+		
+	}
+	
+	public static void listarProdutos(List<Produto> produtosListados) 
+	{
+		int tamanhoLinha = 80;
+		
+		System.out.printf("\nCODIGO | Preço Unit R$ | Estoque | Produto\n");
+		linha (tamanhoLinha);
+		for (Produto produtos : produtosListados)
+		{
+			System.out.printf("\n %s |    %.2f     |    %d    | %s ", produtos.getCodigoProduto(), produtos.getPrecoUnitario(),
+					produtos.getQtdProdutoEstoque(), produtos.getNomeProduto());
+		}
+		
+		
+	}
+	
+	
+	public static void finalizarVenda (double valorTotalCompra, String cpfCliente, int numeroNotaFiscal, int numeroCodigoBarras)
+	{
+		Random sorteia = new Random();
+		Scanner leia = new Scanner(System.in);
+				
+		double valorParcelas=0, valorDesconto=0, valorImpostos=0, valorJuros=0, valorFinalCompra=0;
+		int numeroParcelas, formaPagamento;
+		
+						
+		System.out.print("\nFORMAS DE PAGAMENTO\n\n[1] - A Vista em Dinheiro - Desconto 10%\n[2] - Débito a Vista\n"
+				+ "[3] - Crédito a Vista - Juros de 5%\n[4] - Crédito em até 3x - Juros de 10%\nEscolha a opção desejada: ");
+		formaPagamento = leia.nextInt();
+		//pagamento a vista em dinheiro
+		if (formaPagamento == 1)
+		{
+			valorDesconto = valorTotalCompra*0.10;
+			valorJuros = valorTotalCompra*0;
+			valorImpostos = (valorTotalCompra-valorDesconto+valorJuros)*0.09;
+			valorFinalCompra = valorTotalCompra-valorDesconto+valorImpostos+valorJuros;
+			System.out.println("\nCompra realizada com sucesso. Obrigado por escolher a McFly Discos!");
+			System.out.println("╔══════════════════════════╗");
+			System.out.printf("║NOTA FISCAL %d    ║\n",numeroNotaFiscal);
+            System.out.println("║                          ║ ");
+            System.out.printf("║CPF: %s                  ║\n",cpfCliente);
+            System.out.println("║PAGAMENTO À VISTA-DINHEIRO║");
+            System.out.printf("║SUBTOTAL: R$%.2f        ║\n",valorTotalCompra);
+            System.out.printf("║DESCONTOS: R$%.2f        ║\n",valorDesconto);
+            System.out.printf("║JUROS: R$%.2f             ║\n",valorJuros);
+            System.out.printf("║IMPOSTOS: R$%.2f         ║\n",valorImpostos);
+            System.out.printf("║VALOR FINAL: R$%.2f     ║\n",valorFinalCompra);
+            System.out.println("║                          ║");
+            System.out.println("║      ║|║|║║║║|║║         ║");
+            System.out.printf ("║       %d         ║\n",numeroCodigoBarras);
+            System.out.println("╚══════════════════════════╝");
+			
+		}
+		//pagamento a vista no Debito
+		else if (formaPagamento == 2) 
+		{
+			valorDesconto = valorTotalCompra*0;
+			valorJuros = valorTotalCompra*0;
+			valorImpostos = (valorTotalCompra-valorDesconto+valorJuros)*0.09;
+			valorFinalCompra = valorTotalCompra-valorDesconto+valorImpostos+valorJuros;
+			System.out.println("\nCompra realizada com sucesso. Obrigado por escolher a McFly Discos!");
+			System.out.println("╔══════════════════════════╗");
+			System.out.printf("║NOTA FISCAL %d    ║\n",numeroNotaFiscal);
+            System.out.println("║                          ║ ");
+            System.out.printf("║CPF: %s                  ║\n",cpfCliente);
+            System.out.println("║PAGAMENTO À VISTA-DÉBITO  ║");
+            System.out.printf("║SUBTOTAL: R$%.2f        ║\n",valorTotalCompra);
+            System.out.printf("║DESCONTOS: R$%.2f         ║\n",valorDesconto);
+            System.out.printf("║JUROS: R$%.2f             ║\n",valorJuros);
+            System.out.printf("║IMPOSTOS: R$%.2f         ║\n",valorImpostos);
+            System.out.printf("║VALOR FINAL: R$%.2f     ║\n",valorFinalCompra);
+            System.out.println("║                          ║");
+            System.out.println("║      ║|║|║║║║|║║         ║");
+            System.out.printf ("║       %d         ║\n",numeroCodigoBarras);
+            System.out.println("╚══════════════════════════╝");
+			
+			
+		}
+		//pagamento a vista no Crédito
+		else if (formaPagamento == 3) 
+		{
+			valorDesconto = valorTotalCompra*0;
+			valorJuros = valorTotalCompra*0.05;
+			valorImpostos = (valorTotalCompra-valorDesconto+valorJuros)*0.09;
+			valorFinalCompra = valorTotalCompra-valorDesconto+valorImpostos+valorJuros;
+			System.out.println("\nCompra realizada com sucesso. Obrigado por escolher a McFly Discos!");
+			System.out.println("╔══════════════════════════╗");
+			System.out.printf("║NOTA FISCAL %d    ║\n",numeroNotaFiscal);
+            System.out.println("║                          ║ ");
+            System.out.printf("║CPF: %s                  ║\n",cpfCliente);
+            System.out.println("║PAGAMENTO À VISTA-CRÉDITO ║");
+            System.out.printf("║SUBTOTAL: R$%.2f        ║\n",valorTotalCompra);
+            System.out.printf("║DESCONTOS: R$%.2f         ║\n",valorDesconto);
+            System.out.printf("║JUROS: R$%.2f            ║\n",valorJuros);
+            System.out.printf("║IMPOSTOS: R$%.2f         ║\n",valorImpostos);
+            System.out.printf("║VALOR FINAL: R$%.2f     ║\n",valorFinalCompra);
+            System.out.println("║                          ║");
+            System.out.println("║      ║|║|║║║║|║║         ║");
+            System.out.printf ("║       %d         ║\n",numeroCodigoBarras);
+            System.out.println("╚══════════════════════════╝");
+			
+		}
+		//pagamento parcelado
+		else if (formaPagamento == 4)
+		{
+			do {
+				System.out.print("Digite o número de parcelas que deseja dividir: ");
+				numeroParcelas = leia.nextInt();
+				
+				//pagamento em 2x
+				if (numeroParcelas == 2)
+				{
+					valorDesconto = valorTotalCompra*0;
+					valorJuros = valorTotalCompra*0.05;
+					valorImpostos = (valorTotalCompra-valorDesconto+valorJuros)*0.09;
+					valorFinalCompra = valorTotalCompra-valorDesconto+valorImpostos+valorJuros;
+					valorParcelas = valorFinalCompra/numeroParcelas;
+					System.out.println("\nCompra realizada com sucesso. Obrigado por escolher a McFly Discos!");
+					System.out.println("╔══════════════════════════╗");
+					System.out.printf("║NOTA FISCAL %d    ║\n",numeroNotaFiscal);
+		            System.out.println("║                          ║ ");
+		            System.out.printf("║CPF: %s                  ║\n",cpfCliente);
+		            System.out.println("║PAGAMENTO PARCELADO-2X    ║");
+		            System.out.printf("║SUBTOTAL: R$%.2f        ║\n",valorTotalCompra);
+		            System.out.printf("║DESCONTOS: R$%.2f         ║\n",valorDesconto);
+		            System.out.printf("║JUROS: R$%.2f            ║\n",valorJuros);
+		            System.out.printf("║IMPOSTOS: R$%.2f         ║\n",valorImpostos);
+		            System.out.printf("║PARCELAS: R$%.2f        ║\n",valorParcelas);
+		            System.out.printf("║VALOR FINAL: R$%.2f     ║\n",valorFinalCompra);
+		            System.out.println("║                          ║");
+		            System.out.println("║      ║|║|║║║║|║║         ║");
+		            System.out.printf ("║       %d         ║\n",numeroCodigoBarras);
+		            System.out.println("╚══════════════════════════╝");
+					
+		            break;
+				}
+				//pagamento em 2x
+				else if (numeroParcelas == 3)
+				{
+					valorDesconto = valorTotalCompra*0;
+					valorJuros = valorTotalCompra*0.05;
+					valorImpostos = (valorTotalCompra-valorDesconto+valorJuros)*0.09;
+					valorFinalCompra = valorTotalCompra-valorDesconto+valorImpostos+valorJuros;
+					valorParcelas = valorFinalCompra/numeroParcelas;
+					System.out.println("\nCompra realizada com sucesso. Obrigado por escolher a McFly Discos!");
+					System.out.println("╔══════════════════════════╗");
+					System.out.printf("║NOTA FISCAL %d    ║\n",numeroNotaFiscal);
+		            System.out.println("║                          ║ ");
+		            System.out.printf("║CPF: %s                  ║\n",cpfCliente);
+		            System.out.println("║PAGAMENTO PARCELADO-3X    ║");
+		            System.out.printf("║SUBTOTAL: R$%.2f        ║\n",valorTotalCompra);
+		            System.out.printf("║DESCONTOS: R$%.2f         ║\n",valorDesconto);
+		            System.out.printf("║JUROS: R$%.2f            ║\n",valorJuros);
+		            System.out.printf("║IMPOSTOS: R$%.2f         ║\n",valorImpostos);
+		            System.out.printf("║PARCELAS: R$%.2f        ║\n",valorParcelas);
+		            System.out.printf("║VALOR FINAL: R$%.2f     ║\n",valorFinalCompra);
+		            System.out.println("║                          ║");
+		            System.out.println("║      ║|║|║║║║|║║         ║");
+		            System.out.printf ("║       %d         ║\n",numeroCodigoBarras);
+		            System.out.println("╚══════════════════════════╝");
+					
+		            break;
+				}
+				else if (numeroParcelas > 3 || numeroParcelas <=1)
+				{
+					System.out.println("Numero de parcelas indisponivel.");
+				}
+			}
+			while (true);
+		}			
+			
+	}
+			
+	static void linha(int tamanho) 
 	{
 
-		for (int x = 1; x <= tamanhoLinha; x++) {
-			System.out.print("�");
+		for (int x = 1; x <= tamanho; x++) {
+			System.out.print("—");
 		}
 	}
-
 }

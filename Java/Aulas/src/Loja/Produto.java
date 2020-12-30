@@ -11,17 +11,29 @@ public class Produto
 	private String nomeProduto;
 	private String codigoProduto;
 	private double precoUnitario;
-	private int qtdProdutoEstoque;
-	private int notaFiscal = 2020181200;;
-	
-	
+	private int qtdProdutoEstoque;	
+	private int qtdVendida;
 
 	//Construtores:
-	public Produto(String nomeProduto, String codigoProduto, double precoUnitario) 
+	public Produto(String nomeProduto, String codigoProduto, double precoUnitario, int qtdProdutoEstoque) 
 	{
 		super();
 		this.nomeProduto = nomeProduto;
 		this.codigoProduto = codigoProduto;
+		this.precoUnitario = precoUnitario;
+		this.qtdProdutoEstoque = qtdProdutoEstoque;
+	}
+	public Produto(String nomeProduto) 
+	{
+		super();
+		this.nomeProduto = nomeProduto;
+	}
+
+	public Produto(String nomeProduto, int qtdVendida, double precoUnitario) 
+	{
+		super();
+		this.nomeProduto = nomeProduto;
+		this.qtdVendida = qtdVendida;
 		this.precoUnitario = precoUnitario;
 	}
 	
@@ -60,126 +72,17 @@ public class Produto
 	{
 		return qtdProdutoEstoque;
 	}
-	public int getNotaFiscal() 
+	
+	public int getQtdVendida() 
 	{
-		return notaFiscal;
+		return qtdVendida;
 	}
-
-	public void setNotaFiscal(int notaFiscal) 
+	public void setQtdVendida(int qtdVendida) 
 	{
-		this.notaFiscal = notaFiscal;
-	}
-
-	//Métodos:
-	public void realizarVenda (int qtdVendida)
-	{
-		double valorTotal=0, valorParcelas=0, subTotal=0, valorDesconto=0, valorImpostos=0, valorJuros=0;
-		int numeroParcelas, formaPagamento;
-		Random sorteia = new Random();
-		this.notaFiscal = 2020181200;
-				
-		System.out.print("\nFORMAS DE PAGAMENTO\n[1] - A Vista em Dinheiro - Desconto 10%\n[2] - Débito a Vista\n"
-				+ "[3] - Crédito a Vista - Juros de 5%\n[4] - Crédito em até 3x - Juros de 10%\nEscolha a opção desejada: ");
-		formaPagamento = leia.nextInt();
-		//pagamento a vista em dinheiro
-		if (formaPagamento == 1)
-		{
-			this.qtdProdutoEstoque-=qtdVendida;
-			subTotal = (qtdVendida*this.getPrecoUnitario());
-			valorDesconto = subTotal*0.10;
-			valorJuros = subTotal*0;
-			valorImpostos = (subTotal-valorDesconto+valorJuros)*0.09;
-			valorTotal = subTotal-valorDesconto+valorImpostos+valorJuros;
-			//this.notaFiscal++;
-			System.out.println("\nCOMPRA REALIZADA");
-			System.out.printf("Cod.: %s - %s\nSubTotal: R$%.2f\nJuros: %.2f\nDescontos: -R$%.2f\nImpostos: "
-					+ "R$%.2f\nVALOR A PAGAR: R$%.2f\n", this.getCodigoProduto(),
-					this.getNomeProduto(), subTotal, valorJuros, valorDesconto, valorImpostos, valorTotal);
-		}
-		//pagamento a vista no Debito
-		else if (formaPagamento == 2) 
-		{
-			this.qtdProdutoEstoque-=qtdVendida;
-			subTotal = (qtdVendida*this.getPrecoUnitario());
-			valorDesconto = subTotal*0;
-			valorJuros = subTotal*0;
-			valorImpostos = (subTotal-valorDesconto+valorJuros)*0.09;
-			valorTotal = subTotal-valorDesconto+valorImpostos+valorJuros;
-			this.notaFiscal++;
-			
-			System.out.println("\nCOMPRA REALIZADA");
-			System.out.printf("Cod.: %s - %s\nSubTotal: R$%.2f\nJuros: %.2f\nDescontos: -R$%.2f\nImpostos: "
-					+ "R$%.2f\nVALOR A PAGAR: R$%.2f\n", this.getCodigoProduto(),
-					this.getNomeProduto(), subTotal, valorJuros, valorDesconto, valorImpostos, valorTotal);
-		}
-		//pagamento a vista no Crédito
-		else if (formaPagamento == 3) 
-		{
-			this.qtdProdutoEstoque-=qtdVendida;
-			subTotal = (qtdVendida*this.getPrecoUnitario());
-			valorDesconto = subTotal*0;
-			valorJuros = subTotal*0.05;
-			valorImpostos = (subTotal-valorDesconto+valorJuros)*0.09;
-			valorTotal = subTotal-valorDesconto+valorImpostos+valorJuros;
-			this.notaFiscal++;
-			System.out.println("\nCOMPRA REALIZADA");
-			System.out.printf("Cod.: %s - %s\nSubTotal: R$%.2f\nJuros: %.2f\nDescontos: -R$%.2f\nImpostos: "
-					+ "R$%.2f\nVALOR A PAGAR: R$%.2f\n", this.getCodigoProduto(),
-					this.getNomeProduto(), subTotal, valorJuros, valorDesconto, valorImpostos, valorTotal);
-		}
-		//pagamento parcelado
-		else if (formaPagamento == 4)
-		{
-			System.out.print("Digite o número de parcelas que deseja dividir: ");
-			numeroParcelas = leia.nextInt();
-			
-			//pagamento em 2x
-			if (numeroParcelas == 2)
-			{
-				this.qtdProdutoEstoque-=qtdVendida;
-				subTotal = (qtdVendida*this.getPrecoUnitario());
-				valorDesconto = subTotal*0;
-				valorJuros = subTotal*0.05;
-				valorImpostos = (subTotal-valorDesconto+valorJuros)*0.09;
-				valorTotal = subTotal-valorDesconto+valorImpostos+valorJuros;
-				valorParcelas = valorTotal/numeroParcelas;
-				this.notaFiscal++;
-				
-				System.out.println("\nCOMPRA REALIZADA");
-				System.out.printf("Cod.: %s - %s\nSubTotal: R$%.2f\nJuros: %.2f\nDescontos: -R$%.2f\nImpostos: "
-						+ "R$%.2f\nVALOR A PAGAR: R$%.2f\nPagamento em 2x de R$%.2f\n", this.getCodigoProduto(),
-						this.getNomeProduto(), subTotal, valorJuros, valorDesconto, valorImpostos, valorTotal, valorParcelas);
-			}
-			//pagamento em 2x
-			else if (numeroParcelas == 3)
-			{
-				this.qtdProdutoEstoque-=qtdVendida;
-				subTotal = (qtdVendida*this.getPrecoUnitario());
-				valorDesconto = subTotal*0;
-				valorJuros = subTotal*0.05;
-				valorImpostos = (subTotal-valorDesconto+valorJuros)*0.09;
-				valorTotal = subTotal-valorDesconto+valorImpostos+valorJuros;
-				valorParcelas = valorTotal/numeroParcelas;
-				this.notaFiscal++;
-				System.out.println("\nCOMPRA REALIZADA");
-				System.out.printf("Cod.: %s - %s\nSubTotal: R$%.2f\nJuros: %.2f\nDescontos: -R$%.2f\nImpostos: "
-						+ "R$%.2f\nVALOR A PAGAR: R$%.2f\nPagamento em 3x de R$%.2f\n", this.getCodigoProduto(),
-						this.getNomeProduto(), subTotal, valorJuros, valorDesconto, valorImpostos, valorTotal, valorParcelas);
-			}
-			else if (numeroParcelas > 3 || numeroParcelas <=1)
-			{
-				System.out.println("Numero de parcelas indisponivel.");
-			}			
-		}			
-			
+		this.qtdVendida = qtdVendida;
 	}
 	
-	public void emitirNota()
-	{
-		this.notaFiscal++;
-		System.out.printf("Nº NOTA FISCAL - %d\n",this.notaFiscal);
-		System.out.println("\nObrigado por escolher a McFly Discos");
-	}
+	//Métodos:
 	
 	public void adicionaEstoque (int qtdEntrada)
 	{
@@ -191,7 +94,8 @@ public class Produto
 		if (testarQtdEstoque (qtdRetirada))
 		{
 			this.qtdProdutoEstoque-=qtdRetirada;
-			System.out.printf("Retirada realizada.\nQuantidade anterior: %d\nQuantidade atual: %d",this.getQtdProdutoEstoque()+qtdRetirada,qtdRetirada);
+			/*System.out.printf("Retirada realizada.\nQuantidade anterior: %d\nQuantidade atual: %d",this.getQtdProdutoEstoque()+
+					qtdRetirada,qtdRetirada);*/
 		}
 	}
 	
@@ -206,5 +110,8 @@ public class Produto
 		
 		return testaEstoque;
 	}
+	
+
+	
 	
 }

@@ -1,17 +1,21 @@
 package BancosClasse;
 
 public class ContaEspecial extends ContaCorrente {
-	
 	private double valorLimite;
-	private double valorCadastroLimite;
-	
+	private double valorCadastroLimite = -1000;
+
 	public ContaEspecial(int numeroConta, String cpf, double valorLimite, double valorCadastroLimite) {
 		super(numeroConta, cpf);
 		this.valorLimite = valorLimite;
 		this.valorCadastroLimite = valorCadastroLimite;
 	}
 
-	
+	public ContaEspecial(int numeroConta, String nome, String cpf, double valorLimite) {
+		super(numeroConta, nome, cpf);
+		this.valorLimite = valorLimite;
+		super.tipoConta = 3;
+	}
+
 	public double getValorLimite() {
 		return valorLimite;
 	}
@@ -27,64 +31,60 @@ public class ContaEspecial extends ContaCorrente {
 	public void setValorCadastroLimite(double valorCadastroLimite) {
 		this.valorCadastroLimite = valorCadastroLimite;
 	}
+
 	@Override
-        public boolean testarSaldo(double valor) {
-		
+	public boolean testarSaldo(double valor) {
+
 		boolean teste;
-		if (valor <= super.getSaldoConta()) 
-		{
+		if (valor <= super.getSaldoConta()) {
 			teste = true;
-		} 
-		else if (valor <= (this.valorLimite+super.getSaldoConta()))
-		{
-			// 100 saldo 1000 limite  valor pedido: 200 reais
-			//1000 + (200)
+		} else if (valor <= (this.valorLimite + super.getSaldoConta())) {
+			// 100 saldo 1000 limite valor pedido: 200 reais
+			// 1000 + (200)
 			double valorCredito = valor - super.getSaldoConta();
 			super.FazerCredito(valorCredito);
 			this.valorLimite = this.valorLimite - valorCredito;
 			teste = true;
-		}
-		else
-		{
+		} else {
 			teste = false;
 		}
-		
+
 		return teste;
-	}public void registraLimite() 
-	 {
-		if (valorLimite<=0) {
-			System.out.println("Valor zerado, impossivel realizar!!!");
-		}
-		else {
-			this.valorCadastroLimite = this.valorLimite;
-		}
-		
 	}
-	
-	public void devolverLimite() {
-		if (this.valorLimite < this.valorCadastroLimite) 
-		{
-			double diferenca;
-			diferenca = this.valorCadastroLimite - this.valorLimite;
-			super.FazerDebito(diferenca);
-			this.valorLimite += diferenca;
-			
-		}
+
+	// METODO
+
+	// DÉBITO
+	public void Debito(double valor) {
+
+		if (valor <= super.saldoConta)
+			super.saldoConta -= valor;
+		else if (valor <= (super.saldoConta + this.valorLimite)) {
+			valor -= super.saldoConta;
+			super.saldoConta = 0;
+			this.valorLimite -= valor;
+
+		} else
+			System.out.println("\nTransação Não autorizada. Limite indisponivel.");
+
 	}
-	@Override
-	public void FazerCredito (double valorTransacao)
-	{	
-		if(this.valorCadastroLimite <1000) 
-		{
-			this.valorCadastroLimite+=valorTransacao;
-			if(this.valorCadastroLimite >1000) 
-			{
-				super.FazerCredito(this.valorCadastroLimite-1000);
-				this.valorCadastroLimite=1000;
-				
+
+	// CRÉDITO
+	public void Credito(double valor) {
+
+		if (this.valorLimite < this.valorCadastroLimite) {
+
+			if (valor <= this.valorCadastroLimite - this.valorLimite) {
+				this.valorLimite += valor;
+				valor = 0;
+			} else {
+				valor -= (this.valorCadastroLimite - this.valorLimite);
+				this.valorLimite = this.valorCadastroLimite;
 			}
 		}
-		this.saldoConta+=valorTransacao;
-		System.out.printf("\nTransação realizada com sucesso.\nSaldo atual: R$%.2f\n",getSaldoConta());			
+
+		saldoConta += valor;
+
 	}
+
 }
