@@ -18,8 +18,8 @@ public class lojaTeste
 		int anoNascimento, quantidadeVenda;
 		int numeroNotaFiscal = 1994062100;
 		int numeroCodigoBarras = 2020271100;
-		char generoCliente, opcaoContinuar='S', opcaoVoltarMenuInicial ='S', opcaoMenuInicial='S', adicionarNoCarrinho, formaPagamento;
-		String nomeCliente, cpfCliente, escolhaDisco;
+		char generoCliente, opcaoContinuar='S', opcaoVoltarMenuInicial ='S', opcaoMenuInicial='S', adicionarNoCarrinho, formaPagamento, opcaoMenuFuncionario;
+		String nomeCliente, cpfCliente, escolhaDisco, nomeFuncionario, codigoFuncionario;
 		int tamanhoLinha = 80;
 		int anoAtual = data.get(Calendar.YEAR);
 		double subTotal=0, totalCompra = 0;
@@ -43,7 +43,7 @@ public class lojaTeste
 			linha(tamanhoLinha);
 			System.out.println("\n\t\t\tMcFly - Discos de Vinil");
 			linha(tamanhoLinha);
-			System.out.println("\n[1] - COMPRAR PRODUTOS\n[2] - CATÁLOGO DE PRODUTOS\n[3] - SAIR");
+			System.out.println("\n[1] - COMPRAR PRODUTOS\n[2] - CONTROLE DE PRODUTOS\n[3] - SAIR");
 			System.out.print("\nDigite a opção desejada: ");
 			opcaoMenuInicial = leia.next().charAt(0);
 			linha(tamanhoLinha);
@@ -152,7 +152,17 @@ public class lojaTeste
 						
 			else if(opcaoMenuInicial == '2') 
 			{
+				System.out.println("\nAcesso Restrito a Funcionários ");
+				System.out.print("Digite seu nome: ");
+				nomeFuncionario = leia.next();
+				System.out.print("Digite o seu código de funcionário: ");
+				codigoFuncionario = leia.next();
 				listarProdutos(listaProdutos);
+				System.out.println("\n\n[1] - ADICIONAR PRODUTO\n[2] - REMOVER PRODUTO\n[3] - ALTERAR NOME\n"
+						+ "[4] - ALTERAR PREÇO\n[5] - SAIR");
+				System.out.print("\nDigite a opção desejada: ");
+				opcaoMenuFuncionario = leia.next().charAt(0);
+				
 			}
 			
 			else if(opcaoMenuInicial == '3')
@@ -173,7 +183,7 @@ public class lojaTeste
 	{
 		int tamanhoLinha = 80;
 		
-		System.out.printf("\nCODIGO | Preço Unit R$ | Estoque | Produto\n");
+		System.out.printf("\nCODIGO | Preço Unit R$ | Estoque  | Produto\n");
 		linha (tamanhoLinha);
 		for (Produto produtos : produtosListados)
 		{

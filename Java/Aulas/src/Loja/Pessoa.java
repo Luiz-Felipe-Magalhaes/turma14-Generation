@@ -15,7 +15,15 @@ public abstract class Pessoa
 		this.genero = genero;
 		this.anoNascimento = anoNascimento;
 	}
-	
+		
+	public Pessoa(String nome) 
+	{
+		super();
+		this.nome = nome;
+	}
+
+
+
 	//Getters and Setters:
 	public String getNome() 
 	{
