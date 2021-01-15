@@ -14,15 +14,15 @@ salario float not null,
 primary key(id)
 );
 
--- busca da tabela funcionario
-select * from tb_funcionarios;
-
 -- inserir dados na tabela
 insert into tb_funcionarios (nome,cargo,filial,salario) values ("Daniel Augusto","Desenvolvedor Junior", "Canadá", 4200);
 insert into tb_funcionarios (nome,cargo,filial,salario) values ("Danilo Pereira","Estagiario de Engenharia de Software", "Brasil", 1950);
 insert into tb_funcionarios (nome,cargo,filial,salario) values ("Gustavo Rabelo","Engenheiro de Software Pleno", "Portugal", 12170);
 insert into tb_funcionarios (nome,cargo,filial,salario) values ("Luiz Felipe Magalhães","Estagiario de Engenharia de Software", "Canadá", 1950);
 insert into tb_funcionarios (nome,cargo,filial,salario) values ("Marcos Eduardo","Desenvolvedor Pleno", "Brasil", 7350);
+
+-- busca da tabela funcionario
+select * from tb_funcionarios;
 
 -- busca da tabela funcionario com salario maior que 2000
 select * from tb_funcionarios where salario > 2000;
