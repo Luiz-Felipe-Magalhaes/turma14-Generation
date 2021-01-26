@@ -47,10 +47,10 @@ public class exemploEd_lacoRepeticao {
 		
 				
 		System.out.println("FIM DO PROGRAMA");
-		
-		
 	}
+		
 }
+
 
 	
 

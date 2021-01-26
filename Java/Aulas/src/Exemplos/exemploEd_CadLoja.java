@@ -1,4 +1,4 @@
-package Exemplos;
+/*package Exemplos;
 
 import java.util.Scanner;
 
@@ -14,9 +14,6 @@ public class exemploEd_CadLoja
 		int estoque[] = new int[10];
 		int escolhido = 0;
 		String escolha;
-		
-		
-		
 			
 		linhaDetalhe();
 		System.out.println("Loja Generation");
@@ -30,6 +27,7 @@ public class exemploEd_CadLoja
 		System.out.println();
 		System.out.print("DIGITE A OPÇÃO: ");
 		char opcaoMenu = leia.next().charAt(0);
+		
 		switch (opcaoMenu)
 		{
 			case '1':
@@ -75,9 +73,10 @@ public class exemploEd_CadLoja
 			}
 				
 		}
-		
+
 		
 	}
+
 	
 	
 	public static void linhaDetalhe() {
@@ -109,5 +108,4 @@ public class exemploEd_CadLoja
 		return tipo;
 	
 	}
-	
-}
+}*/
